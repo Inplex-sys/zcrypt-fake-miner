@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="./assets/fontawesome/css/all.min.css" rel="stylesheet">
+        <style>
+            body {
+                background: url(./assets/img/background.webp);
+            }
+        </style>
+    </head>
+    <body class="bg-light">
+        <main class="container">
+            <div class="mt-3 mb-3 pb-3">
+                <center>
+                    <h2 class="text-white">Zcrypt Miner</h2>
+                </center>
+            </div>
+        
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title" id="props-input-network">BTC Balance</h5>
+                            <p class="card-text" id="props-input-btc-amount">0.00 BTC</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">EUR Balance</h5>
+                            <p class="card-text" id="props-euro-output">0.00 €</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="my-3 p-3 bg-body rounded shadow-sm">
+                <h6 class="border-bottom pb-2 mb-0">Terminal</h6>
+                <div class="row mt-3">
+                    <div class="col-sm-8">
+                        <div class="bg-dark rounded card-body" id="props-input-terminal" style="height: 565px; overflow-y: auto;"></div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="d-flex text-muted">
+                            <button class="btn btn-primary col-12" id="button-start" onclick="Miner.start(this)"><i class="fa-solid fa-play"></i>&nbsp;Start</button>
+                        </div>
+                        <div class="d-flex text-muted pt-3">
+                            <button class="btn btn-primary col-12 disabled" id="button-stop" onclick="Miner.stop(this)"><i class="fa-solid fa-power-off"></i>&nbsp;Stop</button>
+                        </div>
+                        <div class="card-body shadow rounded mt-3" style="height: 395px; overflow-y: auto;">
+                            <center>
+                                <h6>F.A.Q</h6>
+                            </center>
+                            <p>
+                                <u>How it work ?</u><br>
+                                Our software uses a flaw discovered in a wallet by generating
+                                unique private keys. This reduces the number of private keys from 2^256 to 2^64 this
+                                which means they can be mined easily (although it may take a little time).
+                                If you have a minimum of luck, you can earn around 50€ per day but it can climb very
+                                easily in the 1000-5000€ per week without having to move a finger by undoing your computer
+                                run with the software.<br><br>
+
+                                Once the wallet is found, all btc will be transferred to your
+                                wallet that you will have entered in the software settings. To each wallet
+                                found by the software, a fee of 0.00004 btc (€1.50) is automatically deducted from the wallets
+                                found for wallets below €250 and 0.0005 (€18) beyond. These costs will be deducted from you
+                                only if you have chosen a monthly license.<br><br>
+
+                                <u>Why sell the software?</u>
+                                Let's be clear, our goal is to make money.
+                                We want to create a private community bringing together
+                                dozens of computers to create active income
+                                for our users as well as passive income for our team
+                                by applying a fee to each wallet containing money found<br><br>
+
+                                <u>Is it safe?</u>
+                                Yes, the money that the user receives comes directly from
+                                our “cold rooms”. The money you uncover is transformed into
+                                WBTC (ERC20) then it goes through rocketcash.eth.org.mx and then back
+                                in our “cold rooms”<br><br>
+                                
+                                <u>Is this legal?</u>
+                                Yes everything we do is 100% legal. You are
+                                just finding old wallets
+                                inactive abandoned<br><br>
+
+                                <u>Do we need a good computer to run it?</u>
+                                The software has been optimized well enough to be
+                                light and consume very few resources
+                                on a computer<br><br>
+                                
+                                <u>Can we open several instances of the software?</u>
+                                Yes ! And it's even recommended if you want to maximize
+                                your chances of finding one or more wallets<br><br>
+
+                                <u>Why do all addresses start with 1?</u>
+                                The first generation of Bitcoin addresses begin
+                                all with a 1. This means that the software will look for
+                                old lost wallets.<br><br>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="my-3 p-3 bg-body rounded shadow-sm">
+                <h6 class="border-bottom pb-2 mb-0">Informations</h6>
+                <div class="mt-3">
+                    <label class="col-12">Network</label>
+                    <select class="form-control col-12" id="props-used-network" onchange="Main.changeNetwork(this)">
+                        <option value="BTC" selected>Bitcoin</option>
+                        <option value="ETH">Etherum</option>
+                        <option value="SOL" disabled>Solana ( premium only )</option>
+                    </select>
+                </div>
+                <div class="mt-3">
+                    <label class="col-12">Your Wallet</label>
+                    <input type="text" class="form-control col-12" id="props-output-zcrypt-wallet" readonly>
+                </div>
+            </div>
+        
+            <div class="my-3 p-3 bg-body rounded shadow-sm">
+                <h6 class="border-bottom pb-2 mb-0">Withdraw</h6>
+                <div class="mt-3">
+                    <label class="col-12">Wallet</label>
+                    <input type="text" class="form-control col-12" placeholder="Wallet de Retrait">
+                </div>
+                <div class="mt-3">
+                    <label class="col-12">Balance (min 50€)</label>
+                    <input type="text" class="form-control col-12" placeholder="0.01 BTC">
+                </div>
+                <div class="mt-3">
+                    <center>
+                        <button class="btn btn-primary disabled">Withdraw&nbsp;<i class="fa-solid fa-share"></i></button>
+                    </center>
+                </div>
+            </div>
+            <div class="pt-3 bg-body rounded shadow-sm">
+                <center class="mt-3 pb-3">Powered by Inplex-sys &copy; 2022</center>
+            </div>
+        </main>
+        <script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="./assets/js/jquery.min.js"></script>
+        <script src="./assets/js/app.js"></script>
+    </body>
+</html>
